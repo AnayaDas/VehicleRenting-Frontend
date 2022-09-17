@@ -18,7 +18,7 @@ const Login = (props) => {
     let id = await validateUser(userName,password).then((response)=> response).catch((error)=> console.log(error));
     console.log(id);
     
-    if(id!== null)
+    if(id!== null && id!== undefined && id!== '' && id!== ' ')
     {
       dispatch(setUser(id))
     

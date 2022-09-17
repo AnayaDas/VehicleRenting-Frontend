@@ -13,6 +13,7 @@ import UserInterface from './components/UserInterface';
 import Profile from './components/Profile';
 import Modal from './components/Modal';
 import DeleteAccount from './components/DeleteAccount';
+import Booking from './components/Booking';
 function App() {
   // const [vehicle , setVehicle] = useState(loadingVehicle);
   // useEffect(()=> {
@@ -34,7 +35,7 @@ function App() {
             <Route exact path='delete' element={<DeleteAccount />} />
             
           </Route>
-          <Route exact path="/userNav/rentCar" element={<CarList/>} /> 
+          <Route exact path="/booking" element={<Booking/>} />  
 
 
 

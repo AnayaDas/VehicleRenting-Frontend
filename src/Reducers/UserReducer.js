@@ -2,6 +2,9 @@ export const UserReducer=(user = {},action) =>{
     switch(action.type){
         case 'SAVE_USER':
             user=action.payload;
+            if(action.payload=== undefined || action.payload ==='' || action.payload===' '){
+            return null;
+    }
             console.log(action.payload);
         console.log("Error");
         return (user);
@@ -18,7 +21,7 @@ export const UserReducer=(user = {},action) =>{
             return(user);
         case 'DELETE_USER':
             console.log(action.payload);
-            return (user);
+            return {};
         default :
         localStorage.getItem('user');
         return(user);

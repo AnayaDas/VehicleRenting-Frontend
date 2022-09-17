@@ -1,82 +1,101 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getAllVehicles } from "../Actions/CarAction";
+import { setVehicle } from "../Actions/VehicleAction";
 
 
-const CarList=()=> {
-    const [vehicleList, setVehicleList] = useState(()=> {
+const CarList = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    function handleBooking(e){
+    dispatch(setVehicle(e.target.id));
+    navigate('/booking');
+
+    }
+    const [vehicleList, setVehicleList] = useState(() => {
         return [
             {
-                "vehicleId":1,
-                "vehicleName":"Baleno",
-                "vehicleNumber":"Mh2387",
-                "rent":500
+                "vehicleId": 0,
+                "vehicleName": "",
+                "vehicleNumber": "",
+                "location": {
+                    "city": "",
+                    "area": ""
+                },
+                "rent": 0
             }
         ]
 
-        
-    })
 
+    })
 
 
     useEffect(() => {
 
-        
-        return(async()=> {
-            const data = await getAllVehicles().then((response)=> response).catch((error)=> console.log(error));
-        setVehicleList(data)
-        console.log(data);
+        console.log("outside return");
+        console.log(vehicleList);
+
+        return (async () => {
+            const data = await getAllVehicles().then((response) => response).catch((error) => console.log(error));
+            setVehicleList(data)
+            console.log(data);
+            console.log(vehicleList);
+            console.log("inside useEffect carList");
 
         }
 
         )
-      
-    
-      
-    }, [])
-    
-    return(
-        <div>
-            {
-                
-                vehicleList.map((element) => {
-                    return(
 
-                        //<li key={element.vehicleId}>
-                            <table className="table table-hover table-warning table-striped" key={element.vehicleId} >
-                            <thead>
-                                    <tr>
-                                    <th scope="col" style={{ bottom:"50vw"}} >Vehicle ID</th>
-                                    <th scope="col"style={{ bottom:"50vw"}}>Vehicle Name</th>
-                                    <th scope="col"style={{ bottom:"50vw"}}>Vehicle Number</th>
-                                     <th scope="col"style={{ bottom:"50vw"}}>City</th>
-                                    <th scope="col"style={{ bottom:"50vw"}}>Area</th> 
-                                    <th scope="col"style={{ bottom:"50vw"}}>Rent Per Hour</th>
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    <tr>
+
+
+    }, [])
+
+    return (
+        <div>
+            <table className="table table-hover table-warning table-striped"  >
+                <thead>
+                    <tr>
+                        <th scope="col" style={{ bottom: "50vw" }} >Vehicle ID</th>
+                        <th scope="col" style={{ bottom: "50vw" }}>Vehicle Name</th>
+                        <th scope="col" style={{ bottom: "50vw" }}>Vehicle Number</th>
+                        <th scope="col" style={{ bottom: "50vw" }}>City</th>
+                        <th scope="col" style={{ bottom: "50vw" }}>Area</th>
+                        <th scope="col" style={{ bottom: "50vw" }}>Rent Per Hour</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    {
+
+
+                        vehicleList.map((element) => {
+                            return (
+
+                                //<li key={element.vehicleId}>
+
+                                <tr key={element.vehicleId} onClick={handleBooking} id={element.vehicleId}>
                                     <th scope="row"> {element.vehicleId}</th>
                                     <td> {element.vehicleName}</td>
                                     <td>{element.vehicleNumber}</td>
-                                    <td>{element[0].location.city}</td>
-                                    <td>{element[0].location.area}</td> 
+                                    <td>{element["location"].city}</td>
+                                    <td>{element["location"].area}</td>
                                     <td> {element.rent}</td>
-                                    </tr>
-                                   
-                                </tbody>
-</table>
+                                </tr>
 
-                    //     {/* vehicleId = {element.vehicleId}
-                    //     vehicleName= {element.vehicleName}
-                    //     vehicleNumber= {element.vehicleNumber}
-                    //     rent= {element.rent} */}
-                    //    // </li>
-                        
 
-                    );
-                })
-            }
-            </div>
+
+                                //     {/* vehicleId = {element.vehicleId}
+                                //     vehicleName= {element.vehicleName}
+                                //     vehicleNumber= {element.vehicleNumber}
+                                //     rent= {element.rent} */}
+                                //    // </li>
+
+
+                            );
+                        })
+                    }  </tbody>
+            </table>
+        </div>
     );
 
 }

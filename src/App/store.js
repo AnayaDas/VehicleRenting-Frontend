@@ -3,9 +3,10 @@ import { UserReducer } from "../Reducers/UserReducer";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { VehicleReducer } from "../Reducers/VehicleReducer";
 
 export default  configureStore({
-    reducer: { user: UserReducer },
+    reducer: { user: UserReducer , vehicle: VehicleReducer},
     middleware:(getDefaultMiddleware) => getDefaultMiddleware().concat(thunk).concat(logger),
     devTools: [composeWithDevTools]
 })
