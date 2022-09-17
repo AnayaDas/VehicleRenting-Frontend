@@ -1,4 +1,4 @@
-export const VehicleReducer = (vehicle = 'booking',action)=>{
+export const VehicleReducer = (vehicle = '',action)=>{
     switch (action.type) {
         case 'SET_STAGE':
             vehicle = action.vehicle;
@@ -10,3 +10,5 @@ export const VehicleReducer = (vehicle = 'booking',action)=>{
             return vehicle;
     }
 }
+
+// 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

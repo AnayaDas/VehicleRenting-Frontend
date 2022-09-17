@@ -8,7 +8,8 @@ import { setVehicle } from "../Actions/VehicleAction";
 const CarList = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    function handleBooking(e){
+    const handleBooking = (e) =>{
+        console.log(e.target.id);
     dispatch(setVehicle(e.target.id));
     navigate('/booking');
 

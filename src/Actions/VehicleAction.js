@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const setVehicle = (vehicle) => {
     return{
         type:'SET_VEHICLE',
@@ -5,18 +7,16 @@ export const setVehicle = (vehicle) => {
     }
 }
 
-export const getVehicleById = async (id) => {
+export const getVehicleByName = async (name) => {
 
 
-    return async() => {
-    const data = await axios.get('http://localhost:8089/vehicle/fetch'+id).then((response) => response.data).catch((error) => console.log(error));
+    console.log("vehicleAction");
+    
+    const data = await axios.get('http://localhost:8089/vehicle/get/'+name).then((response) => response.data).catch((error) => console.log(error));
     console.log(data);
-    dispatch({
-        type: 'SET_VEHICLE',
-        vehicle: vehicle
-    })
+    return data;
 }
 
 
 
-}
+
