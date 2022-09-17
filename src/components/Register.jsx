@@ -57,13 +57,68 @@ const Register = (props) => {
     }
     setConfirmPassword(e.target.value);
   }
-//   function goToPhone(passedType) {
+//  function goToPhone(passedType) {
 //     navigate('phone');
   //}
   function handleMobileNumber(e) {
+    if(mobileNumber.length===9){
+      setPopUp(' ');
+    }
+    else{
+      
+      setPopUp('Mobile Number should contain 10 digits');
+    }
     setMobileNumber(e.target.value);
-  }
+//     if(mobileNumber.length===10 && !isNaN(mobileNumber)){
+//       const user={
+//         dtype:'C',
+//         pan:panNumber,
+//         address:address,
+//         email:email,
+//         mobileNumber:mobileNumber,
+//         password:password,
+//         username:userName
+//         //setMobileNumber(e.target.value);
+//     }
+//     dispatch(saveUser(user));
+    
+//   }
+//   else{
+//     setPopUp('Mobile Number should contain 10 digits');
+//     setUserName(' ');
+//     setPassword(' ');
+//     setPanNumber(' ');
+//     setAddress(' ');
+//     setEmail(' ');
+//     setConfirmPassword(' ');
+
+//  }
+}
   function handleRegister(e) {
+    if(mobileNumber.length===9){
+      const user={
+        dtype:'C',
+        pan:panNumber,
+        address:address,
+        email:email,
+        mobileNumber:mobileNumber,
+        password:password,
+        username:userName
+        //setMobileNumber(e.target.value);
+    }
+    dispatch(saveUser(user));
+    
+  }
+  else{
+    setPopUp('Mobile Number should contain 10 digits');
+    setUserName(' ');
+    setPassword(' ');
+    setPanNumber(' ');
+    setAddress(' ');
+    setEmail(' ');
+    setConfirmPassword(' ');
+
+ }
     if (password===confirmPassword){
         const user={
             dtype:'C',

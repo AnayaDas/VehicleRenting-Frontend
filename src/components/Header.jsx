@@ -1,11 +1,15 @@
-import React from "react";
+
 import 'bootstrap/dist/css/bootstrap.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { userDispatch } from 'react-redux';
 import { Link } from "react-router-dom";
 
-class Header extends React.Component{
-    render(){
+import React, { useState } from 'react';
+
+//class Header extends React.Component{
+  const Header = (props) => {
+  
+   // render(){
         return(
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
   <div className="container-fluid">
@@ -25,18 +29,19 @@ class Header extends React.Component{
           <Link className="nav-link active" to={"/register"}>Register</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link active" to={"/car"}>Cars</Link>
+          <Link className="nav-link active" to={"/carlist"}>Cars</Link>
         </li>  
       </ul>
     </div>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-      <button class="btn btn-outline-warning" type="submit">Search</button>
+    <form className="d-flex">
+      <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+      <button className="btn btn-outline-warning" type="submit">Search</button>
     </form>
+    
   </div>
 </nav>
         )
     }
 
-}
+//}
 export default Header;

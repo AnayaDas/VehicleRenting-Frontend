@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { setUser, validateUser } from '../Actions/UserAction';
 
 
 const Login = (props) => {
@@ -9,15 +11,30 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [popUp, setPopUp] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   
   const handleLogin = async () => {
+    console.log("handleLogin entered");
+    let id = await validateUser(userName,password).then((response)=> response).catch((error)=> console.log(error));
+    console.log(id);
+    
+    if(id!== null)
+    {
+      dispatch(setUser(id))
+    
+      navigate('/userNav/profile');
+    }
+    else{
+      setTimeout(()=>{
+        setPopUp('Incorrect Username or Password');
+      },500);
+      setPassType(false);
+      setUserName('');
+      setPassword('');
 
-    setTimeout(()=>{
-      setPopUp('Incorrect Username or Password');
-    },500);
-    setPassType(false);
-    setUserName('');
-    setPassword('');
+    }
+
+    
   }
 
   function handleShow() {
@@ -33,7 +50,7 @@ const Login = (props) => {
   }
 
   function goToPhone(passedType) {
-    navigate('phone');
+    navigate('/register');
   }
 
 
@@ -61,7 +78,7 @@ const Login = (props) => {
                 <td colSpan={2} style={{ fontSize: '1.5vw' }} >Show Password<input onChange={handleShow} checked={passType} type="checkbox" className="form-check-input" style={{ padding: '0.5vw', marginLeft: '1vw' }} id="passType" /></td>
               </tr>
               <tr>
-                <td colSpan={2} style={{ fontSize: '1.5vw', lineHeight: '0.2vw' }} id='link1' ><a onClick={() =>  {<Link className="nav-link active" to={"/register"}></Link> }} className="link-warning hovPoint">New here? Create an account</a></td>
+                <td colSpan={2} style={{ fontSize: '1.5vw', lineHeight: '0.2vw' }} id='link1' ><a onClick={() =>  {goToPhone('customer')}} className="link-warning hovPoint">New here? Create an account</a></td>
               </tr>
               <tr>
                 <td colSpan="2"><button type="button" className="btn btn-warning" onClick={handleLogin} style={{ fontSize: '2vw', padding: '0vw 1vw' }}>Login</button></td>

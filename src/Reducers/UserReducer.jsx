@@ -1,4 +1,4 @@
-export const UserReducer=(user = '',action) =>{
+export const UserReducer=(user = {},action) =>{
     switch(action.type){
         case 'SAVE_USER':
             user=action.payload;
@@ -6,9 +6,19 @@ export const UserReducer=(user = '',action) =>{
         console.log("Error");
         return (user);
         case 'SET_USER':
+            console.log("inside reducer")
+            console.log(user)
+
+            // user=action.payload;
+           // localStorage.setItem('user',JSON.stringfy(user));
+            return action.payload;
+        case 'FETCH_USER':
             user=action.payload;
-            localStorage.setItem('user',user);
+            console.log(action.payload);  
             return(user);
+        case 'DELETE_USER':
+            console.log(action.payload);
+            return (user);
         default :
         localStorage.getItem('user');
         return(user);
