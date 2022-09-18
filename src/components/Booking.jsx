@@ -1,22 +1,31 @@
 import { useEffect, useState } from "react";
 import { FormGroup } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { getVehicleById } from "../Actions/VehicleAction";
+import { getVehicleByName } from "../Actions/VehicleAction";
 
 
 const Booking = () =>{
-    const id = useSelector( state => state.vehicle);
-    const [vehicle, setVehicle] = useState()
+    // const vehicle = useSelector( state => state.vehicle);
+    // console.log(vehicle);
+    const name = useSelector( state => state.vehicle);
+    const [vehicle, setVehicle] = useState();
+    const getVehicleByName1 = async()=>{
+
+        const data = await getVehicleByName(name).then((response) => response).catch((error) => console.log(error));
+
+        console.log(data);
+
+        setVehicle(data);
+
+
+    } 
     useEffect(()=>{
-        
         console.log("inside useEffect");
-        return async() =>{
-            const data = await getVehicleById(id).then((response) => response).catch((error) => console.log(error));
-            console.log(data);
-            setVehicle(data);
-            
+        return async()=>{
+           await getVehicleByName1();
         }
-    },[]);
+        }
+    ,[]);
 
 
     return (

@@ -9,8 +9,8 @@ const CarList = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleBooking = (e) =>{
-        console.log(e.target.id);
-    dispatch(setVehicle(e.target.id));
+        console.log(e.target.name);
+    dispatch(setVehicle(e.target.name));
     navigate('/booking');
 
     }
@@ -74,7 +74,7 @@ const CarList = () => {
 
                                 //<li key={element.vehicleId}>
 
-                                <tr key={element.vehicleId} onClick={handleBooking} id={element.vehicleId}>
+                                <tr key={element.vehicleId} onClick={handleBooking} name={element.vehicleName}>
                                     <th scope="row"> {element.vehicleId}</th>
                                     <td> {element.vehicleName}</td>
                                     <td>{element.vehicleNumber}</td>

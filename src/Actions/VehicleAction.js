@@ -7,14 +7,20 @@ export const setVehicle = (vehicle) => {
     }
 }
 
-export const getVehicleById = async (id) => {
+export const getVehicleByName = async (name) => {
 
 
     console.log("vehicleAction");
     
-    const data = await axios.get('http://localhost:8089/vehicle/fetch/1').then((response) => response.data).catch((error) => console.log(error));
+    const data = await axios.get('http://localhost:8089/vehicle/fetch/'+name).then((response) => response.data).catch((error) => console.log(error));
     console.log(data);
+    if(data=== undefined || data ===null || data ==='') return{
+        vehicleName: "Vento",
+        vehicleNumber: "WB5637S87"
+    }
+    else{
     return data;
+    }
 }
 
 
